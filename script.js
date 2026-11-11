@@ -1,47 +1,5 @@
-
-const menuBtn = document.querySelector(".menu");
-const links = document.querySelector(".links");
-
-menuBtn?.addEventListener("click", () => {
-  const open = links.classList.toggle("open");
-  menuBtn.setAttribute("aria-expanded", String(open));
-  menuBtn.textContent = open ? "×" : "☰";
-});
-
-links?.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    links.classList.remove("open");
-    menuBtn?.setAttribute("aria-expanded", "false");
-    if (menuBtn) menuBtn.textContent = "☰";
-  });
-});
-
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-const form = document.getElementById("enquiry");
-
-form?.addEventListener("submit", event => {
-  event.preventDefault();
-
-  const data = new FormData(form);
-
-  const message = [
-    "Hello Akrisha Innovations, I would like to enquire about a machine.",
-    `Name: ${data.get("name")}`,
-    `Company: ${data.get("company") || "Not provided"}`,
-    `Phone: ${data.get("phone")}`,
-    `Email: ${data.get("email") || "Not provided"}`,
-    `Machine: ${data.get("machine")}`,
-    `Requirement: ${data.get("message") || "Please contact me."}`
-  ].join("\n");
-
-  document.getElementById("status").textContent =
-    "WhatsApp is opening. Please review and send your enquiry.";
-
-  window.open(
-    "https://wa.me/917022192992?text=" +
-    encodeURIComponent(message),
-    "_blank"
-  );
-});
+const menuBtn=document.querySelector('.menu'),navLinks=document.querySelector('.links');
+menuBtn?.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.setAttribute('aria-label',open?'Close navigation':'Open navigation');menuBtn.textContent=open?'×':'☰';});
+navLinks?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{navLinks.classList.remove('open');menuBtn?.setAttribute('aria-expanded','false');menuBtn?.setAttribute('aria-label','Open navigation');if(menuBtn)menuBtn.textContent='☰';}));
+const year=document.getElementById('year');if(year)year.textContent=new Date().getFullYear();
+document.getElementById('enquiry')?.addEventListener('submit',event=>{event.preventDefault();const d=new FormData(event.currentTarget);const message=['Hello Akrisha Innovations, I would like to enquire about SV CNC machines.',`Name: ${d.get('name')}`,`Company: ${d.get('company')||'Not provided'}`,`Mobile: ${d.get('phone')}`,`Email: ${d.get('email')||'Not provided'}`,`Machine category: ${d.get('machine')}`,`Application / requirement: ${d.get('message')||'Please contact me.'}`].join('\n');const status=document.getElementById('status');if(status)status.textContent='Opening WhatsApp. Please review the enquiry and press Send.';window.open('https://wa.me/917022192992?text='+encodeURIComponent(message),'_blank','noopener,noreferrer');});
